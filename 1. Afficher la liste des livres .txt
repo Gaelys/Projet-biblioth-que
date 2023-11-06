@@ -1,0 +1,40 @@
+1. Afficher la liste des livres :
+ *      Parcourez le tableau `$books` et affichez l'ID et le nom de chaque livre dans une liste ordonnée.
+ *
+ * 2. Trouver un livre spécifique :
+ *      Écrivez une fonction nommée `findBook` qui prend un ID de livre en paramètre et retourne le nom du livre.
+ *      Si l'ID du livre n'est pas trouvé, retournez "Livre non trouvé".
+ *
+ * 3. Compter et afficher :
+ *      Affichez le nombre total de livres dans la base de données. 
+
+$book1 = [
+    'id' => 1,
+    'titre' => 'To Kill a Mockingbird',
+    'prix' => '12',
+    'auteur' => 'Harper Lee',
+    'date' => '11/07/1960'
+];
+
+$book2 = [
+    'id' => 2,
+    'titre' => '1984',
+    'prix' => '10',
+    'auteur' => 'George Orwell',
+    'date' => '01/01/1991'
+];
+
+$book3 = [
+    'id' => 3,
+    'titre' => 'Brave New World',
+    'prix' => '14',
+    'auteur' => 'Aldous Huxley',
+    'date' => '01/01/1932'
+];
+
+$books = [$book1, $book2, $book3];
+
+
+foreach ($books as $book) {
+    echo 'Le titre du livre est '.$book['titre'];
+} 
