@@ -1,7 +1,7 @@
 <?php
-if (empty($_GET)) {
-    header('Location: index.php');
-    exit();
+if ((empty($_GET)) || (is_string($_GET['identifiant']) && !is_numeric($_GET['identifiant']))) {
+  header('Location: index.php');
+  exit();
 }
 include "header.php";
 $idbook = $_GET['identifiant'];
