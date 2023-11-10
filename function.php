@@ -1,48 +1,34 @@
 <?php
-function test() {
-    echo "test";
-};
-
-function linktodb() {
+// link call to db
+function linkToDb() {
     require_once '_connec.php';
     return $pdo = new \PDO(DSN, USER, PASS);
-};
+    return $pdo;
+}
 
-function booklist($pdo) {
-    $query = "SELECT book.idbook, title, lastname, firstname FROM `book` JOIN book_author ON book.idbook = book_author.idbook JOIN author ON author.idauthor = book_author.idauthor;";
+// list id of all books (call linktodb() first)
+function bookList() {
+    $pdo = linkToDb();
+    $query = "SELECT idbook FROM `book` ;";
     $statement = $pdo->query($query);
-    return $books = $statement->fetchAll(PDO::FETCH_ASSOC);
-};
-?>
+    $books = $statement->fetchAll(PDO::FETCH_COLUMN);
+    return $books;
+}
 
+function getBook($idbook) {
+    $pdo = linkToDb();
+    $queryGetBook = "SELECT * FROM book WHERE idbook = :identifiant";
+    $statementGetBook = $pdo ->prepare($queryGetBook);
+    $statementGetBook ->bindValue(':identifiant', $idbook, \PDO::PARAM_INT);
+    $statementGetBook =  $pdo->query($queryGetBook);
+    $book = $statementGetBook->fetchAll(PDO::FETCH_ASSOC);
+    return $book;
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-((empty($_POST['title']) || mb_strlen($_POST['title']) > 45 ) || (empty($_POST['lastname']) || mb_strlen($_POST['lastname']) > 45) || (empty($_POST['firstname'])|| mb_strlen($_POST['firstname']) > 45) || (empty($_POST['category'])) || ($_POST['date'] > $currentDate) || ($_POST['price'] <= 0) ) {
-    
-//
-    $currentDate = date("Y-m-d");
-    if (empty($_POST['title']) || mb_strlen($_POST['title']) > 45 ) {
-        echo "Vous devez entrer un nom de livre.<br/>";
-
-    } else if (isset($_POST['resume'])) {
-        if  (mb_strlen($_POST['resume']) > 1500) {
-        echo "Votre résumé doit faire moins de 1500 caractères.";
-        };    
+function delete($table, $parametre) {
+    $pdo = linkToDb();
+    $queryDelete = "DELETE FROM $table WHERE idauthor = :idauthor";
+    $statementDelete = $pdo ->prepare($queryDelete);
+    $statementDelete ->bindValue(':idauthor', $parametre, \PDO::PARAM_INT);
+    $statementDelete ->execute(); 
+}
