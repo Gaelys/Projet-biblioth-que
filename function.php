@@ -25,10 +25,10 @@ function getBook($idbook) {
     return $book;
 }
 
-function delete($table, $parametre) {
+function delete($table, $param) {
     $pdo = linkToDb();
     $queryDelete = "DELETE FROM $table WHERE idauthor = :idauthor";
     $statementDelete = $pdo ->prepare($queryDelete);
-    $statementDelete ->bindValue(':idauthor', $parametre, \PDO::PARAM_INT);
+    $statementDelete ->bindValue(':idauthor', $param, \PDO::PARAM_INT);
     $statementDelete ->execute(); 
 }
