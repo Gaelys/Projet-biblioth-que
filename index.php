@@ -12,15 +12,13 @@ $books = $statement->fetchAll(PDO::FETCH_ASSOC);
 
 <form method="get">
     <label>Recherche : </label>
-    <input type="text" name="keyword" placeholder="
+    <input type="text" name="keyword" placeholder="entrer un mot clé" 
     <?php
     if (isset($_GET['keyword'])) {
-        echo $_GET['keyword'];
-    } else {
-    echo "entrer un mot clé";
+        echo 'value="' . $_GET['keyword'] . '"';
     }
     ?>
-    "/>
+    />
     <input type="submit" value="Filtrer"/>
 </form>
 <?php
